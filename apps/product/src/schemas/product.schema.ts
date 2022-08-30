@@ -4,16 +4,14 @@ import { AbstractDocument } from '@app/common';
 @Schema({ versionKey: false })
 export class Product extends AbstractDocument {
   @Prop()
-  nome: string;
+  name: string;
 
   @Prop()
-  descricao: string;
+  description: string;
 
   @Prop()
   price: number;
 
-  @Prop()
-  phoneNumber: string;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
