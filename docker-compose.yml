@@ -1,24 +1,46 @@
 services:
+  main:
+    build:
+      context: .
+      dockerfile: ./apps/main/Dockerfile
+      target: development
+    command: 'npm run start:dev'
+    env_file:
+      - ./apps/main/.env
+    depends_on:
+      - mongodb-primary
+      - mongodb-secondary
+      - mongodb-arbiter
+      - product
+      - rabbitmq
+    volumes:
+      - '.:/usr/src/app'
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+
   product:
     build:
       context: .
       dockerfile: ./apps/product/Dockerfile
       target: development
-    command: npm run start:dev product
+    command: 'npm run start:dev product'
     env_file:
       - ./apps/product/.env
     depends_on:
       - mongodb-primary
       - mongodb-secondary
       - mongodb-arbiter
+      - rabbitmq
     volumes:
-      - .:/usr/src/app
+      - '.:/usr/src/app'
       - /usr/src/app/node_modules
+  rabbitmq:
+    image: rabbitmq
     ports:
-      - '3000:3000'
-
+      - '5672:5672'
   mongodb-primary:
-    image: docker.io/bitnami/mongodb:6.0
+    image: 'docker.io/bitnami/mongodb:6.0'
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
@@ -28,9 +50,8 @@ services:
       - 'mongodb_master_data:/bitnami/mongodb'
     ports:
       - '27017:27017'
-
   mongodb-secondary:
-    image: docker.io/bitnami/mongodb:6.0
+    image: 'docker.io/bitnami/mongodb:6.0'
     depends_on:
       - mongodb-primary
     environment:
@@ -39,9 +60,8 @@ services:
       - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
-
   mongodb-arbiter:
-    image: docker.io/bitnami/mongodb:6.0
+    image: 'docker.io/bitnami/mongodb:6.0'
     depends_on:
       - mongodb-primary
     environment:
@@ -50,7 +70,6 @@ services:
       - MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
-
 volumes:
   mongodb_master_data:
     driver: local
