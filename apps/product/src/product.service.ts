@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ProductService {
-  getHello(): string {
-    return 'Hello World!';
+  createProduct() {
+    return 'This action adds a new product';
   }
+
 }
