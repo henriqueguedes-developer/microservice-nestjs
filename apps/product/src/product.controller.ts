@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { query } from 'express';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
+import { RmqService } from '@app/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ProductService } from './product.service';
 

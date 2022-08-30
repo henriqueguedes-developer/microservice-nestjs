@@ -734,6 +734,14 @@
     "tslib" "2.4.0"
     "uuid" "8.3.2"
 
+"@nestjs/microservices@^9.0.0", "@nestjs/microservices@^9.0.11":
+  "integrity" "sha512-SalP+y96HAsrNnPkt+RQAYlPSzofs/D90Y0ZS9oveBiCQhezKSnkBZ7Qpv3uLFbs6TsL/VHG9nVoQC6aiZA0ww=="
+  "resolved" "https://registry.npmjs.org/@nestjs/microservices/-/microservices-9.0.11.tgz"
+  "version" "9.0.11"
+  dependencies:
+    "iterare" "1.2.1"
+    "tslib" "2.4.0"
+
 "@nestjs/mongoose@^9.2.0":
   "integrity" "sha512-fC33b8nwR7C3y6hlTyKjiHQVU57SFOd3Dwa6alWj3BOhK5bHt8Ld6qOK2G35/XXPHjtSIk3LIKEqwyK5xGcmBA=="
   "resolved" "https://registry.npmjs.org/@nestjs/mongoose/-/mongoose-9.2.0.tgz"
