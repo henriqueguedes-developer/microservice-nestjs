@@ -1,16 +1,18 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { RmqService } from '@app/common';
-import { CreateProductDto } from './dto/create-product.dto';
 import { ProductService } from './product.service';
 
 @Controller()
 export class ProductController {
-  constructor(private readonly productService: ProductService) { }
+  constructor(
+    private readonly productService: ProductService,
+    private readonly rmqService: RmqService) { }
 
-  @Post()
-  async createProduct(@Body() createProductDto: CreateProductDto) {
-    return this.productService.createProduct(createProductDto);
+  @EventPattern('order_created')
+  async createProduct(@Payload() data: any, @Ctx() context: RmqContext) {
+    this.productService.createProduct(data);
+    this.rmqService.ack(context);
   }
 
   @Get()

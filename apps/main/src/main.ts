@@ -6,8 +6,7 @@ import { MainModule } from './main.module';
 async function bootstrap() {
   const app = await NestFactory.create(MainModule);
   app.useGlobalPipes(new ValidationPipe());
-  const configService = app.get(ConfigService);
-  await app.listen(configService.get('PORT'));
+  await app.listen(3000);
 
 }
 bootstrap();
