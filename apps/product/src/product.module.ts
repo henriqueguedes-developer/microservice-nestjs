@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import * as Joi from 'joi';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
-import { Product, ProductSchema } from './schemas/produto.schema';
+import { Product, ProductSchema } from './schemas/product.schema';
 
 @Module({
   imports: [

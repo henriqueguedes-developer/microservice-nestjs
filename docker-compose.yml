@@ -6,7 +6,7 @@ services:
       target: development
     command: npm run start:dev product
     env_file:
-      - ./apps/orders/.env
+      - ./apps/product/.env
     depends_on:
       - mongodb-primary
       - mongodb-secondary

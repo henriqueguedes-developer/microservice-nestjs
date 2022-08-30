@@ -3,7 +3,7 @@ import { ProductService } from './product.service';
 
 @Controller()
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: ProductService) { }
 
   @Get()
   getHello(): string {
